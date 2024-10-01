@@ -118,12 +118,32 @@ class Line extends Mesh
     }
 
     this.geometry.setIndex(indices);
-    /** @type {BufferAttribute} */(this.geometry.getAttribute('position')).copy(new BufferAttribute(vertexList, 3));
-    /** @type {BufferAttribute} */(this.geometry.getAttribute('next_position')).copy(new BufferAttribute(nextPositionList, 3));
-    /** @type {BufferAttribute} */(this.geometry.getAttribute('previous_position')).copy(new BufferAttribute(previousPositionList, 3));
-    /** @type {BufferAttribute} */(this.geometry.getAttribute('orientation')).copy(new BufferAttribute(orientationList, 1));
-    /** @type {BufferAttribute} */(this.geometry.getAttribute('coverage')).copy(new BufferAttribute(coverageList, 1));
 
+    const position_attribute = this.geometry.getAttribute('position');
+    if (position_attribute instanceof BufferAttribute)
+    {
+      position_attribute.copy(new BufferAttribute(vertexList, 3));
+    }
+    const next_position_attribute = this.geometry.getAttribute('next_position');
+    if (next_position_attribute instanceof BufferAttribute)
+    {
+      next_position_attribute.copy(new BufferAttribute(nextPositionList, 3));
+    }
+    const previous_position_attribute = this.geometry.getAttribute('previous_position');
+    if (previous_position_attribute instanceof BufferAttribute)
+    {
+      previous_position_attribute.copy(new BufferAttribute(previousPositionList, 3));
+    }
+    const orientation_attribute = this.geometry.getAttribute('orientation');
+    if (orientation_attribute instanceof BufferAttribute)
+    {
+      orientation_attribute.copy(new BufferAttribute(orientationList, 1));
+    }
+    const coverage_attribute = this.geometry.getAttribute('coverage');
+    if (coverage_attribute instanceof BufferAttribute)
+    {
+      coverage_attribute.copy(new BufferAttribute(coverageList, 1));
+    }
     this.geometry.getAttribute('position').needsUpdate = true;
     this.geometry.getAttribute('next_position').needsUpdate = true;
     this.geometry.getAttribute('previous_position').needsUpdate = true;
